@@ -2,63 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class WeaponSystem : MonoBehaviour
 {
-    public string[] guns;
 
-    public float reloadTime;
-    public float fireRate;
-    public float damage;
+    public Transform cam;
+    [SerializeField]
+    private LayerMask target;
+    [SerializeField] GunData gunData;
+    public float firingTime;
+    private int ammoDecrease;
 
     // Start is called before the first frame update
     void Start()
     {
-        guns[0] = "pistol";
-        guns[1] = "ar";
-        guns[2] = "smg";
-        guns[3] = "shotgun";
-        guns[4] = "blaster";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        firingTime -= Time.deltaTime;
+
+        Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.red);
+
+        if (Input.GetMouseButton(0) && firingTime <= 0 && gunData.ammo > 0)
         {
+            RaycastHit laserHit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out laserHit, target))
+            {
+                Debug.Log(laserHit.collider.name);
+            }
+
+            gunData.ammo -= 1;
+            firingTime = gunData.fireRate;
 
         }
+
+        if (Input.GetKeyDown("r") && gunData.reloading == false && gunData.ammo != gunData.magsize && this.gameObject.activeSelf) 
+        {
+            StartCoroutine(Reload());
+        }
+
+
     }
 
-    public void pistolOut()
+    private IEnumerator Reload()
     {
-        reloadTime = 1.0f;
-        fireRate = 1.0f;
-        damage = 1.0f;
+        gunData.reloading = true;
+
+        yield return new WaitForSeconds(gunData.reloadTime);
+
+        ammoDecrease = gunData.magsize - gunData.ammo;
+        gunData.overallAmmo -= ammoDecrease;
+
+        gunData.ammo = gunData.magsize;
+
+        gunData.reloading = false;
+
+
     }
-    public void arOut()
+
+    private void OnDisable()
     {
-        reloadTime = 2.0f;
-        fireRate = 2.0f;
-        damage = 2.0f;
-    }
-    public void smgOut()
-    {
-        reloadTime = 5.0f;
-        fireRate = 5.0f;
-        damage = 5.0f;
-    }
-    public void shotgunOut()
-    {
-        reloadTime = 10.0f;
-        fireRate = 10.0f;
-        damage = 10.0f;
-    }
-    public void blasterOut()
-    {
-        reloadTime = 05f;
-        fireRate = 0.5f;
-        damage = 0.5f;
+        gunData.reloading = false;
     }
 
 

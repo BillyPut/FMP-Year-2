@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Pistol
   damage: 14
   fireRate: 0.4
-  ammo: 3
+  ammo: 15
   magsize: 16
-  overallAmmo: 21
+  overallAmmo: 64
   reloadTime: 2
-  reloading: 1
+  reloading: 0

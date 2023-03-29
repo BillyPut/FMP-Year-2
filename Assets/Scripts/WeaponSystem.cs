@@ -54,7 +54,7 @@ public class WeaponSystem : MonoBehaviour
         yield return new WaitForSeconds(gunData.reloadTime);
 
         ammoDecrease = gunData.magsize - gunData.ammo;
-        gunData.overallAmmo -= ammoDecrease;
+        //gunData.overallAmmo -= ammoDecrease;
 
         gunData.ammo = gunData.magsize;
 

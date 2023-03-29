@@ -15,8 +15,8 @@ MonoBehaviour:
   name: AssualtRifle
   damage: 20
   fireRate: 0.2
-  ammo: 28
+  ammo: 30
   magsize: 30
-  overallAmmo: 6
+  overallAmmo: 90
   reloadTime: 3
   reloading: 0

@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
+using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour
 {
+    private Animator anim;
+    //[HideInInspector]
+    public int animNum;
+
     public Transform[] points;
 
     public float health;
@@ -40,29 +47,49 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();    
         maxDist = 30f;
         minDist = 5f;
 
+        health = 100f;
         currentAmmo = 30;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!nav.pathPending && nav.remainingDistance < 0.5f && detectPlayer == false) 
+        if (animNum != 5)
         {
-            GoToNextPoint();
+            if (!nav.pathPending && nav.remainingDistance < 0.5f && detectPlayer == false)
+            {
+                GoToNextPoint();
+            }
+
+            HitDetection();
+
+            if (detectPlayer == true)
+            {
+                ChasePlayer();
+                ShootAtPlayer();
+            }
+            else
+            {
+                animNum = 1;
+            }
+
+           
         }
-
-        HitDetection();
-
-        if (detectPlayer == true)
+        else
         {
-            ChasePlayer();
-            ShootAtPlayer();
+            nav.ResetPath();
         }
-       
-       
+        
+        anim.SetInteger("AnimNum", animNum);
+
+        if (health <= 0)
+        {
+            animNum = 5;
+        }
     }
 
     void HitDetection()
@@ -111,13 +138,15 @@ public class EnemyScript : MonoBehaviour
         {
             nav.ResetPath();
             nav.destination = new Vector3(player.transform.position.x, 1f, player.transform.position.z);
-            nav.speed = 0.5f;
+            nav.speed = 3.5f;
+            animNum = 3;
         }
 
         if (dist <= minDist)
         {
             nav.speed = 0f;
             transform.LookAt(player.transform.position);
+            animNum = 4;
         }
       
         if (dist >= maxDist)
@@ -144,7 +173,7 @@ public class EnemyScript : MonoBehaviour
             if (Physics.Raycast(playerTargetter.transform.position, /*direction*/ new Vector3(direction.x + Random.Range(0.2f, -0.2f), direction.y + Random.Range(0.2f, -0.2f), direction.z), out laserHit, playerLayer))
             {
 
-                Debug.Log(laserHit.collider.name);
+                //Debug.Log(laserHit.collider.name);
 
                 if (laserHit.collider.name == "Player")
                 {
@@ -152,7 +181,7 @@ public class EnemyScript : MonoBehaviour
                 }
             }
 
-            fireRate = 0.2f;
+            fireRate = 0.6f;
             currentAmmo -= 1;
         }
 
@@ -171,6 +200,19 @@ public class EnemyScript : MonoBehaviour
         currentAmmo = 30;
         reloading = false;
     }
+
+    void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        detectPlayer = true;
+    }
+
+    
 
     private void OnDrawGizmos()
     {

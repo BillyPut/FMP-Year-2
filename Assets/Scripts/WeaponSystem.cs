@@ -32,6 +32,13 @@ public class WeaponSystem : MonoBehaviour
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out laserHit, target))
             {
                 Debug.Log(laserHit.collider.name);
+                
+                if (laserHit.collider.tag == "Enemy")
+                {
+                    laserHit.transform.SendMessageUpwards("TakeDamage", gunData.damage);
+                }
+
+
             }
 
             gunData.ammo -= 1;

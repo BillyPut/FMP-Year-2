@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     bool headBump;
 
     Vector3 velocity;
+   
+    void Start()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,8 +38,8 @@ public class PlayerMovement : MonoBehaviour
         {
             headBump = false;
         }
-        
 
+        
         if (isGrounded && velocity.y < 0 )
         {
             velocity.y = -2f;
@@ -42,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            Debug.Log("ead");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
@@ -59,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftControl) && speed <=10)// && isGrounded == true)
         {
-            speed = 4f;          
-            transform.localScale = new Vector3(1, 0.5F, 1);
-            
+            speed = 4f;
+            transform.localScale = new Vector3(1, 0.5f, 1);
+                    
         }
         else
         {
@@ -73,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
       
 
-        cC.Move(walk * speed * Time.deltaTime);
+        cC.Move(speed * Time.deltaTime * walk);
 
        
        

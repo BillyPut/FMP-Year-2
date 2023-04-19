@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class EnemyScript : MonoBehaviour
 {
     private Animator anim;
+    private CapsuleCollider col;
     //[HideInInspector]
     public int animNum;
 
@@ -48,10 +49,11 @@ public class EnemyScript : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();    
+        col = GetComponent<CapsuleCollider>();
         maxDist = 30f;
         minDist = 5f;
 
-        health = 100f;
+        health = 50f;
         currentAmmo = 30;
     }
 
@@ -89,6 +91,7 @@ public class EnemyScript : MonoBehaviour
         if (health <= 0)
         {
             animNum = 5;
+            col.enabled = false;
         }
     }
 
@@ -103,7 +106,7 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            hitDistance = 10f;
+            hitDistance = 20f;
             hitObject = null;
         }
 

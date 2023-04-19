@@ -18,5 +18,5 @@ MonoBehaviour:
   ammo: 15
   magsize: 16
   overallAmmo: 64
-  reloadTime: 2
+  reloadTime: 1.5
   reloading: 0

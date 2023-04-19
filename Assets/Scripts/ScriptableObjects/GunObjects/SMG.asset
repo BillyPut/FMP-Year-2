@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SMG
   m_EditorClassIdentifier: 
   name: SubMachine-Gun
-  damage: 0
-  fireRate: 0
-  ammo: 30
+  damage: 7
+  fireRate: 0.05
+  ammo: 14
   magsize: 30
   overallAmmo: 120
-  reloadTime: 0
+  reloadTime: 2
   reloading: 0

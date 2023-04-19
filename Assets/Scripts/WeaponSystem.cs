@@ -10,13 +10,14 @@ public class WeaponSystem : MonoBehaviour
     public Transform cam;
     [SerializeField]
     private LayerMask target;
-    [SerializeField] GunData gunData;
+    [SerializeField] public GunData gunData;
     public float firingTime;
     private int ammoDecrease;
 
     // Start is called before the first frame update
     void Start()
     {
+        gunData.ammo = gunData.magsize;
     }
 
     // Update is called once per frame

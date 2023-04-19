@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int health;
-    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI healthText, ammoText, totalammoText;
+    public WeaponSwitching weaponSwitching;
 
 
     // Start is called before the first frame update
@@ -20,5 +21,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {      
         healthText.text = (health.ToString());
+        ammoText.text = (weaponSwitching.ammo.ToString());
+        totalammoText.text = (weaponSwitching.ammoAmount.ToString());
     }
 }

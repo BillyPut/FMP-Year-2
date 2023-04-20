@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController cC;
+    public Transform cam;
+    public Transform gunHolder;
 
     public float speed = 10f;
     public float gravity = -9.8f;
@@ -47,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            Debug.Log("ead");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
@@ -66,7 +67,23 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl) && speed <=10)// && isGrounded == true)
         {
             speed = 4f;
-            transform.localScale = new Vector3(1, 0.5f, 1);
+            cC.height = 1.4f;
+
+            cam.transform.position = new Vector3(transform.position.x, transform.position.y + 0.51f, transform.position.z);
+            gunHolder.transform.position = new Vector3(gunHolder.transform.position.x, transform.position.y + 0.505f, gunHolder.transform.position.z);
+
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (i == 0)
+                {
+                    transform.GetChild(i).transform.localScale = new Vector3(1.2f, 0.6f, 1.2f);
+                }
+                else
+                {
+                    transform.GetChild(i).transform.localScale = new Vector3(1f, 0.5f, 1f);
+                }
+            }
                     
         }
         else
@@ -75,14 +92,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 ResetToDefault();
             }
-        }
 
-      
+            cC.height = 2.8f;
+            cam.transform.position = new Vector3(transform.position.x, transform.position.y + 1.02f, transform.position.z);
+            gunHolder.transform.position = new Vector3(gunHolder.transform.position.x, transform.position.y + 1.01f, gunHolder.transform.position.z);
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (i == 0)
+                {
+                    transform.GetChild(i).transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                }
+                else
+                {
+                    transform.GetChild(i).transform.localScale = new Vector3(1f, 1f, 1f);
+                }
+            }
+        }
 
         cC.Move(speed * Time.deltaTime * walk);
 
-       
-       
+
 
     }
 

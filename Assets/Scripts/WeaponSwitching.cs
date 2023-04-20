@@ -54,7 +54,6 @@ public class WeaponSwitching : MonoBehaviour
         {
             if (Input.GetKeyDown(num.ToString()))
             {
-                Debug.Log(num);
                 pressedNumber = num;
             }
           

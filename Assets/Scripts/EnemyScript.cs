@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
 {
     private Animator anim;
     private CapsuleCollider col;
+    public GameObject ragdoll;
     //[HideInInspector]
     public int animNum;
 
@@ -81,17 +82,16 @@ public class EnemyScript : MonoBehaviour
 
            
         }
-        else
-        {
-            nav.ResetPath();
-        }
-        
+            
         anim.SetInteger("AnimNum", animNum);
 
         if (health <= 0)
         {
+            nav.enabled = false;
             animNum = 5;
             col.enabled = false;
+            Instantiate(ragdoll, new Vector3(transform.position.x, transform.position.y + 0.02f, transform.position.z), transform.rotation);
+            Death();
         }
     }
 
@@ -99,14 +99,14 @@ public class EnemyScript : MonoBehaviour
     {
         startPoint = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
 
-        if (Physics.SphereCast(startPoint, 4f, transform.forward, out hit, 20f, visionLayer))
+        if (Physics.SphereCast(startPoint, 4.0f, transform.forward, out hit, 25f, visionLayer))
         {
             hitObject = hit.transform.gameObject;
             hitDistance = hit.distance;
         }
         else
         {
-            hitDistance = 20f;
+            hitDistance = 25f;
             hitObject = null;
         }
 
@@ -180,11 +180,11 @@ public class EnemyScript : MonoBehaviour
 
                 if (laserHit.collider.name == "Player")
                 {
-                    gameManager.health -= Random.Range(5, 10);
+                    gameManager.health -= Random.Range(2, 5);
                 }
             }
 
-            fireRate = 0.6f;
+            fireRate = 0.3f;
             currentAmmo -= 1;
         }
 
@@ -221,7 +221,7 @@ public class EnemyScript : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Debug.DrawLine(startPoint, startPoint + transform.forward * hitDistance);
-        Gizmos.DrawWireSphere(startPoint + transform.forward * hitDistance, 4f);
+        Gizmos.DrawWireSphere(startPoint + transform.forward * hitDistance, 4.0f);
     }
 
 }

@@ -27,7 +27,7 @@ public class WeaponSystem : MonoBehaviour
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.red);
 
-        if (Input.GetMouseButton(0) && firingTime <= 0 && gunData.ammo > 0)
+        if (Input.GetMouseButton(0) && firingTime <= 0 && gunData.ammo > 0 && gunData.reloading == false)
         {
             RaycastHit laserHit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out laserHit, target))

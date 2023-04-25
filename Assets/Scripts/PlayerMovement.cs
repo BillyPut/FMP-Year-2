@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             cam.transform.position = new Vector3(transform.position.x, transform.position.y + 0.51f, transform.position.z);
             gunHolder.transform.position = new Vector3(gunHolder.transform.position.x, transform.position.y + 0.505f, gunHolder.transform.position.z);
 
+            gameObject.tag = ("Sneaking");
 
             for (int i = 0; i < 3; i++)
             {
@@ -96,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
             cC.height = 2.8f;
             cam.transform.position = new Vector3(transform.position.x, transform.position.y + 1.02f, transform.position.z);
             gunHolder.transform.position = new Vector3(gunHolder.transform.position.x, transform.position.y + 1.01f, gunHolder.transform.position.z);
+
+            gameObject.tag = ("Player");
 
             for (int i = 0; i < 3; i++)
             {

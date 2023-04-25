@@ -9,6 +9,7 @@ public class WeaponSwitching : MonoBehaviour
     public int selectedWeapon;
     public float switchTime;
     public int ammo, ammoAmount;
+    public int weaponAmount;
     [SerializeField] public Transform[] guns;
 
     // Start is called before the first frame update
@@ -24,6 +25,8 @@ public class WeaponSwitching : MonoBehaviour
             guns[i] = transform.GetChild(i);
            
         }
+
+        weaponAmount = 1;
     }
 
     // Update is called once per frame
@@ -50,13 +53,16 @@ public class WeaponSwitching : MonoBehaviour
 
     public void GetPressedKey()
     {
-        for (int num = 0; num <= 5; num++)
+        for (int num = 1; num <= 5; num++)
         {
-            if (Input.GetKeyDown(num.ToString()))
+            if (weaponAmount >= num)
             {
-                pressedNumber = num;
+                if (Input.GetKeyDown(num.ToString()))
+                {
+                    pressedNumber = num;
+                }
             }
-          
+                    
         }
 
     }

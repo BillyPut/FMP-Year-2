@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {      
+        if (health > 100)
+        {
+            health = 100;
+        }
+
+
+
         healthText.text = (health.ToString());
         ammoText.text = (weaponSwitching.ammo.ToString());
         totalammoText.text = (weaponSwitching.ammoAmount.ToString());

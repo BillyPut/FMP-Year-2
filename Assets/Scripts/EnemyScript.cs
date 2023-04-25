@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 using Random = UnityEngine.Random;
 
@@ -26,6 +27,10 @@ public class EnemyScript : MonoBehaviour
     RaycastHit hit;
     private float hitDistance;
     private Vector3 startPoint;
+
+    public float sphereSize;
+    public bool stationary;
+    private float randomness;
 
     private NavMeshAgent nav;
     private int destPoint;
@@ -56,6 +61,7 @@ public class EnemyScript : MonoBehaviour
 
         health = 50f;
         currentAmmo = 30;
+        randomness = 0.2f;
     }
 
     // Update is called once per frame
@@ -99,7 +105,7 @@ public class EnemyScript : MonoBehaviour
     {
         startPoint = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
 
-        if (Physics.SphereCast(startPoint, 4.0f, transform.forward, out hit, 25f, visionLayer))
+        if (Physics.SphereCast(startPoint, sphereSize, transform.forward, out hit, 25f, visionLayer))
         {
             hitObject = hit.transform.gameObject;
             hitDistance = hit.distance;
@@ -119,7 +125,6 @@ public class EnemyScript : MonoBehaviour
 
     void GoToNextPoint()
     {
-        nav.speed = 3.5f;
 
         if (points.Length == 0)
         {
@@ -141,8 +146,18 @@ public class EnemyScript : MonoBehaviour
         {
             nav.ResetPath();
             nav.destination = new Vector3(player.transform.position.x, 1f, player.transform.position.z);
-            nav.speed = 3.5f;
-            animNum = 3;
+            if (stationary == false)
+            {
+                nav.speed = 3.5f;
+                animNum = 3;
+            }
+            else
+            {
+                nav.speed = 0;
+                transform.LookAt(player.transform.position);
+                animNum = 4;
+            }
+           
         }
 
         if (dist <= minDist)
@@ -166,21 +181,21 @@ public class EnemyScript : MonoBehaviour
 
         playerTargetter.transform.LookAt(player.transform.position);
 
-        Debug.DrawRay(playerTargetter.transform.position, /*direction * 20*/ new Vector3(direction.x + Random.Range(0.2f, -0.2f), direction.y + Random.Range(0.2f, -0.2f), direction.z), Color.green);
-
         fireRate -= Time.deltaTime;
 
         if (fireRate <= 0 && currentAmmo > 0)
         {
             RaycastHit laserHit;
-            if (Physics.Raycast(playerTargetter.transform.position, /*direction*/ new Vector3(direction.x + Random.Range(0.2f, -0.2f), direction.y + Random.Range(0.2f, -0.2f), direction.z), out laserHit, playerLayer))
+            if (Physics.Raycast(playerTargetter.transform.position, /*direction*/ new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), out laserHit, playerLayer))
             {
-
-                //Debug.Log(laserHit.collider.name);
-
                 if (laserHit.collider.name == "Player")
                 {
                     gameManager.health -= Random.Range(2, 5);
+                    Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), Color.green);
+                }
+                else
+                {
+                    Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), Color.red);
                 }
             }
 
@@ -221,7 +236,7 @@ public class EnemyScript : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Debug.DrawLine(startPoint, startPoint + transform.forward * hitDistance);
-        Gizmos.DrawWireSphere(startPoint + transform.forward * hitDistance, 4.0f);
+        Gizmos.DrawWireSphere(startPoint + transform.forward * hitDistance, sphereSize);
     }
 
 }

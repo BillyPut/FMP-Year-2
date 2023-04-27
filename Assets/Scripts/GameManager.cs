@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public int health;
     public TextMeshProUGUI healthText, ammoText, totalammoText;
     public WeaponSwitching weaponSwitching;
+    public Vector3 respawnPoint;
+    public GameObject player;
 
 
     // Start is called before the first frame update
@@ -31,4 +33,13 @@ public class GameManager : MonoBehaviour
         ammoText.text = (weaponSwitching.ammo.ToString());
         totalammoText.text = (weaponSwitching.ammoAmount.ToString());
     }
+
+    public void RespawnPlayer()
+    {
+        player.transform.position = respawnPoint;
+        health -= 20;
+       
+    }
+
+
 }

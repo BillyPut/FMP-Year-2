@@ -18,12 +18,14 @@ public class EnemyScript : MonoBehaviour
 
     public Transform[] points;
 
-    public float health;
+    private float health;
     public GameManager gameManager;
     
-    public GameObject hitObject;
+    private GameObject hitObject;
     public LayerMask visionLayer;
     public LayerMask playerLayer;
+    [HideInInspector]
+    public LayerMask enemyLayer;
     RaycastHit hit;
     private float hitDistance;
     private Vector3 startPoint;
@@ -37,6 +39,9 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject player;
     public bool detectPlayer;
+    private float lastPosTimer;
+    private Vector3 direction;
+    public Transform spine;
 
     [HideInInspector]
     public float dist;
@@ -45,10 +50,16 @@ public class EnemyScript : MonoBehaviour
     [HideInInspector]
     public float minDist;
 
-    public bool reloading;
-    public float fireRate;
-    public int currentAmmo;
+    private bool reloading;
+    private float fireRate;
+    private int currentAmmo;
     public Transform playerTargetter;
+
+    public float heightDiff;
+    public float walkingSpeed;
+
+    [HideInInspector]
+    public EnemyScript enemyScript;
 
     // Start is called before the first frame update
     void Start()
@@ -60,8 +71,8 @@ public class EnemyScript : MonoBehaviour
         minDist = 5f;
 
         health = 50f;
-        currentAmmo = 30;
-        randomness = 0.2f;
+        currentAmmo = 20;
+        randomness = 0.05f;
     }
 
     // Update is called once per frame
@@ -84,9 +95,11 @@ public class EnemyScript : MonoBehaviour
             else
             {
                 animNum = 1;
+                nav.speed = walkingSpeed;
             }
 
-           
+            
+
         }
             
         anim.SetInteger("AnimNum", animNum);
@@ -99,6 +112,19 @@ public class EnemyScript : MonoBehaviour
             Instantiate(ragdoll, new Vector3(transform.position.x, transform.position.y + 0.02f, transform.position.z), transform.rotation);
             Death();
         }
+
+
+       
+
+    }
+
+    void LateUpdate()
+    {
+        if (detectPlayer == true)
+        {
+            //spine.transform.LookAt(player.transform.position);
+        }
+
     }
 
     void HitDetection()
@@ -121,6 +147,24 @@ public class EnemyScript : MonoBehaviour
             detectPlayer = true;
         }
 
+        enemyLayer = LayerMask.GetMask("Enemy");
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 20f, enemyLayer);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            GameObject collider = colliders[i].gameObject; 
+            if (collider.CompareTag("Enemy") && collider.gameObject != gameObject)
+            {
+                enemyScript = collider.GetComponent<EnemyScript>();
+                if (enemyScript != null)
+                {
+                    if (enemyScript.detectPlayer == true)
+                    {
+                        detectPlayer = true;
+                    }
+                }
+            }
+        }
+
     }
 
     void GoToNextPoint()
@@ -139,14 +183,27 @@ public class EnemyScript : MonoBehaviour
     void ChasePlayer()
     {
         float dist = Vector3.Distance(player.transform.position, transform.position);
+        
 
         //Debug.Log(dist);
 
         if (dist < maxDist && dist > minDist)
         {
             nav.ResetPath();
-            nav.destination = new Vector3(player.transform.position.x, 1f, player.transform.position.z);
-            if (stationary == false)
+            RaycastHit laserHit;
+            Physics.Raycast(player.transform.position, -Vector3.up, out laserHit, playerLayer);
+
+            //Vector3 laserPosition = laserHit.collider.transform.TransformDirection(laserHit.point);
+            //Debug.Log(laserPosition.y);
+            //Debug.Log(laserHit.point.y);
+
+            nav.destination = new Vector3(player.transform.position.x, laserHit.point.y,player.transform.position.z);
+            float disty = (laserHit.point.y - transform.position.y);
+            //float disty = (player.transform.position - transform.position.y) - 1.4f;
+
+            //Debug.Log(disty);
+
+            if (stationary == false && disty > heightDiff)
             {
                 nav.speed = 3.5f;
                 animNum = 3;
@@ -166,40 +223,47 @@ public class EnemyScript : MonoBehaviour
             transform.LookAt(player.transform.position);
             animNum = 4;
         }
-      
+        
         if (dist >= maxDist)
         {
             nav.ResetPath();
             detectPlayer = false;
         }
+       
 
     }
-
+    
     void ShootAtPlayer()
     {
-        Vector3 direction = (player.transform.position - playerTargetter.transform.position).normalized;
+     
+
+        if (lastPosTimer <= 0)
+        {
+            direction = (player.transform.position - playerTargetter.transform.position).normalized;           
+        }      
 
         playerTargetter.transform.LookAt(player.transform.position);
 
         fireRate -= Time.deltaTime;
+        lastPosTimer -= Time.deltaTime;
+
+        Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x, direction.y, direction.z), Color.red);
 
         if (fireRate <= 0 && currentAmmo > 0)
         {
             RaycastHit laserHit;
             if (Physics.Raycast(playerTargetter.transform.position, /*direction*/ new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), out laserHit, playerLayer))
             {
+               
                 if (laserHit.collider.name == "Player")
                 {
                     gameManager.health -= Random.Range(2, 5);
                     Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), Color.green);
                 }
-                else
-                {
-                    Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), Color.red);
-                }
             }
 
             fireRate = 0.3f;
+            lastPosTimer = 0.27f;
             currentAmmo -= 1;
         }
 
@@ -215,7 +279,7 @@ public class EnemyScript : MonoBehaviour
 
         yield return new WaitForSeconds(3.0f);
 
-        currentAmmo = 30;
+        currentAmmo = 20;
         reloading = false;
     }
 
@@ -237,6 +301,8 @@ public class EnemyScript : MonoBehaviour
         Gizmos.color = Color.red;
         Debug.DrawLine(startPoint, startPoint + transform.forward * hitDistance);
         Gizmos.DrawWireSphere(startPoint + transform.forward * hitDistance, sphereSize);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, 20f);
     }
 
 }

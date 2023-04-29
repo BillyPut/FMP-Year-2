@@ -26,9 +26,11 @@ public class GameManager : MonoBehaviour
         {
             health = 100;
         }
-
-
-
+        if (health < 0)
+        {
+            health = 0;
+        }
+        
         healthText.text = (health.ToString());
         ammoText.text = (weaponSwitching.ammo.ToString());
         totalammoText.text = (weaponSwitching.ammoAmount.ToString());

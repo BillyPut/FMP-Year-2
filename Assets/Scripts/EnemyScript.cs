@@ -60,6 +60,7 @@ public class EnemyScript : MonoBehaviour
 
     [HideInInspector]
     public EnemyScript enemyScript;
+    private NavMeshPath path;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +68,7 @@ public class EnemyScript : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();    
         col = GetComponent<CapsuleCollider>();
+        path = new NavMeshPath();
         maxDist = 30f;
         minDist = 5f;
 
@@ -203,7 +205,10 @@ public class EnemyScript : MonoBehaviour
 
             //Debug.Log(disty);
 
-            if (stationary == false && disty > heightDiff)
+            bool reachable = nav.CalculatePath(new Vector3(player.transform.position.x, laserHit.point.y, player.transform.position.z), path);
+            //Debug.Log(reachable);
+
+            if (stationary == false && disty > heightDiff && reachable == true)
             {
                 nav.speed = 3.5f;
                 animNum = 3;

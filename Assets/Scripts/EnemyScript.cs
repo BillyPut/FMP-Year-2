@@ -310,7 +310,13 @@ public class EnemyScript : MonoBehaviour
         detectPlayer = true;
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Explosion")
+        {
+            health = 0;
+        }
+    }
 
     private void OnDrawGizmos()
     {

@@ -12,11 +12,12 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
 
+    public int cursorState;
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        cursorState = 1;
     }
 
     // Update is called once per frame
@@ -31,5 +32,19 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         weapons.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
+
+        if (cursorState == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if (cursorState == 1)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (cursorState == 2)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        
     }
 }

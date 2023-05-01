@@ -17,7 +17,7 @@ public class WeaponSwitching : MonoBehaviour
         guns = new Transform[transform.childCount];
         selectedWeapon = 1;
         pressedNumber = 1;
-        switchTime = 1.0f;
+        switchTime = 0.2f;
         
         for (int i = 0; i < transform.childCount; i++) 
         {
@@ -43,7 +43,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[selectedWeapon - 1].gameObject.SetActive(false);
             guns[pressedNumber - 1].gameObject.SetActive(true);
             selectedWeapon = pressedNumber;
-            switchTime = 1.0f;
+            switchTime = 0.2f;
         }
 
         ammo = transform.GetChild(selectedWeapon - 1).GetComponent<WeaponSystem>().gunData.ammo;

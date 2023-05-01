@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 33df99ebde50f11459e6c09b6e9ea15e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - ELNATH
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 11dbbab8ea249a14ba6f8d22e5a6f7ad, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

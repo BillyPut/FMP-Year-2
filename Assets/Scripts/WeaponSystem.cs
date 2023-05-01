@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -13,6 +14,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] public GunData gunData;
     public float firingTime;
     private int ammoDecrease;
+    public GameObject explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class WeaponSystem : MonoBehaviour
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.red);
 
+
         if (Input.GetMouseButton(0) && firingTime <= 0 && gunData.ammo > 0 && gunData.reloading == false)
         {
             RaycastHit laserHit;
@@ -34,16 +37,22 @@ public class WeaponSystem : MonoBehaviour
             {
                 Debug.Log(laserHit.collider.name);
                 
-                if (laserHit.collider.tag == "Enemy")
+                if (laserHit.collider.tag == "Enemy" && gunData.name != "Blaster")
                 {
                     laserHit.transform.SendMessageUpwards("TakeDamage", gunData.damage);
+
+                    gunData.ammo -= 1;
+                    firingTime = gunData.fireRate;
+
+                }
+
+                if (gunData.name == "Blaster")
+                {
+                    Instantiate(explosion, laserHit.point, laserHit.transform.rotation);
                 }
 
 
             }
-
-            gunData.ammo -= 1;
-            firingTime = gunData.fireRate;
 
         }
 

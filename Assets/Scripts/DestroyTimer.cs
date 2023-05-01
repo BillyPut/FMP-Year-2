@@ -6,7 +6,7 @@ public class DestroyTimer : MonoBehaviour
 {
     public float deathTime;
 
-    void FixedUpdate()
+    void Update()
     {
         deathTime -= Time.deltaTime;
         if (deathTime <= 0)

@@ -430,6 +430,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  health: 50
   gameManager: {fileID: 0}
   visionLayer:
     serializedVersion: 2
@@ -442,6 +443,7 @@ MonoBehaviour:
     m_Bits: 0
   sphereSize: 4
   stationary: 0
+  patrolling: 1
   player: {fileID: 0}
   detectPlayer: 0
   spine: {fileID: 856406212862669240}

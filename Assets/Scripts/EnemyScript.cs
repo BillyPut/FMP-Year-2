@@ -18,7 +18,7 @@ public class EnemyScript : MonoBehaviour
 
     public Transform[] points;
 
-    private float health;
+    public float health;
     public GameManager gameManager;
     
     private GameObject hitObject;
@@ -31,7 +31,7 @@ public class EnemyScript : MonoBehaviour
     private Vector3 startPoint;
 
     public float sphereSize;
-    public bool stationary;
+    public bool stationary, patrolling;
     private float randomness;
 
     private NavMeshAgent nav;
@@ -72,7 +72,6 @@ public class EnemyScript : MonoBehaviour
         maxDist = 30f;
         minDist = 5f;
 
-        health = 50f;
         currentAmmo = 20;
         randomness = 0.05f;
     }
@@ -82,9 +81,12 @@ public class EnemyScript : MonoBehaviour
     {
         if (animNum != 5)
         {
-            if (!nav.pathPending && nav.remainingDistance < 0.5f && detectPlayer == false)
+            if (patrolling == true)
             {
-                GoToNextPoint();
+                if (!nav.pathPending && nav.remainingDistance < 0.5f && detectPlayer == false)
+                {
+                    GoToNextPoint();
+                }
             }
 
             HitDetection();
@@ -96,8 +98,17 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {
-                animNum = 1;
-                nav.speed = walkingSpeed;
+                if (patrolling == true)
+                {
+                    animNum = 1;
+                    nav.speed = walkingSpeed;
+                }
+                else
+                {
+                    animNum = 0;
+                    nav.speed = 0f;
+                }
+               
             }
 
             

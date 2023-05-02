@@ -37,13 +37,9 @@ public class WeaponSystem : MonoBehaviour
             {
                 Debug.Log(laserHit.collider.name);
                 
-                if (laserHit.collider.tag == "Enemy" && gunData.name != "Blaster")
+                if (laserHit.collider.tag == "Enemy")
                 {
                     laserHit.transform.SendMessageUpwards("TakeDamage", gunData.damage);
-
-                    gunData.ammo -= 1;
-                    firingTime = gunData.fireRate;
-
                 }
 
                 if (gunData.name == "Blaster")
@@ -53,6 +49,10 @@ public class WeaponSystem : MonoBehaviour
 
 
             }
+
+            gunData.ammo -= 1;
+            firingTime = gunData.fireRate;
+
 
         }
 

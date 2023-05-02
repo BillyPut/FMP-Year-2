@@ -9,6 +9,7 @@ public class EndSequenceInitiation : MonoBehaviour
 
     private bool buttonsAppeared;
     public GameObject choiceButtons;
+    public GameObject enemies;
 
     public WeaponSwitching weapons;
     public MouseLook cam;
@@ -55,6 +56,7 @@ public class EndSequenceInitiation : MonoBehaviour
     {
         blasterAcquired = true;
         weapons.weaponAmount += 1;
+        enemies.SetActive(true);
         ResetValues();     
     }
 

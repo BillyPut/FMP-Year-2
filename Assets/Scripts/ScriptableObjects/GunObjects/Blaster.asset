@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Blaster
   m_EditorClassIdentifier: 
   name: Blaster
-  damage: 0
+  damage: 100
   fireRate: 0
   ammo: 1
   magsize: 1
   overallAmmo: 999
-  reloadTime: 0
+  reloadTime: 5
   reloading: 0

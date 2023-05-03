@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Blaster
   damage: 100
   fireRate: 0
-  ammo: 1
+  ammo: 0
   magsize: 1
   overallAmmo: 999
-  reloadTime: 5
+  reloadTime: 1
   reloading: 0

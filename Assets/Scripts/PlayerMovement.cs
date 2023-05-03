@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         cC.Move(speed * Time.deltaTime * walk);
 
-
+        
 
     }
 

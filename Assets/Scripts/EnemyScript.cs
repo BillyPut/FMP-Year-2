@@ -310,10 +310,10 @@ public class EnemyScript : MonoBehaviour
         detectPlayer = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Explosion")
-        {
+        if (other.gameObject.tag == "Projectile")
+        { 
             health = 0;
         }
     }

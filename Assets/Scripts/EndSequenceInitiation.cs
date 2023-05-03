@@ -26,8 +26,16 @@ public class EndSequenceInitiation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        detonateTimer -= Time.deltaTime;
         detonateText.text = (detonateTimer.ToString());
+
+        if (detonateTimer <= 0 && countdownSequence == true)
+        {
+            detonateTimer = 0;
+        }
+        else
+        {
+            detonateTimer -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

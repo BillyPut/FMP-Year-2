@@ -15,6 +15,7 @@ public class WeaponSystem : MonoBehaviour
     public float firingTime;
     private int ammoDecrease;
     public GameObject explosion;
+    public GameObject particleHit;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,11 @@ public class WeaponSystem : MonoBehaviour
                 if (gunData.name == "Blaster")
                 {
                     Instantiate(explosion, laserHit.point, laserHit.transform.rotation);
+                }
+                else
+                {
+                    Quaternion instDir = Quaternion.FromToRotation(laserHit.normal, Vector3.forward);
+                    Instantiate(particleHit, laserHit.point, instDir);
                 }
 
 

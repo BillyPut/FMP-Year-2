@@ -54,6 +54,7 @@ public class EnemyScript : MonoBehaviour
     private float fireRate;
     private int currentAmmo;
     public Transform playerTargetter;
+    public GameObject particleHit;
 
     public float heightDiff;
     public float walkingSpeed;
@@ -270,12 +271,19 @@ public class EnemyScript : MonoBehaviour
             RaycastHit laserHit;
             if (Physics.Raycast(playerTargetter.transform.position, /*direction*/ new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), out laserHit, playerLayer))
             {
-               
+
                 if (laserHit.collider.name == "Player")
                 {
                     gameManager.health -= Random.Range(2, 5);
                     Debug.DrawRay(playerTargetter.transform.position, new Vector3(direction.x + Random.Range(randomness, -randomness), direction.y + Random.Range(randomness, -randomness), direction.z), Color.green);
                 }
+                else
+                {
+                    Quaternion instDir = Quaternion.FromToRotation(laserHit.normal, Vector3.forward);
+                    Instantiate(particleHit, laserHit.point, instDir);
+                }
+
+
             }
 
             fireRate = 0.3f;

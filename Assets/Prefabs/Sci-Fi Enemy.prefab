@@ -451,6 +451,8 @@ MonoBehaviour:
   maxDist: 0
   minDist: 0
   playerTargetter: {fileID: 8317990700909958963}
+  particleHit: {fileID: 5711320260818889153, guid: 13adc43d35fda0e498aed66d0687d854,
+    type: 3}
   heightDiff: -5
   walkingSpeed: 0
   enemyScript: {fileID: 0}

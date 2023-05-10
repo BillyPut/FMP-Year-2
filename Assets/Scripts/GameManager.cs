@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,9 +32,13 @@ public class GameManager : MonoBehaviour
             health = 0;
         }
         
-        healthText.text = (health.ToString());
-        ammoText.text = (weaponSwitching.ammo.ToString());
-        totalammoText.text = (weaponSwitching.ammoAmount.ToString());
+        if (healthText != null)
+        {
+            healthText.text = (health.ToString());
+            ammoText.text = (weaponSwitching.ammo.ToString());
+            totalammoText.text = (weaponSwitching.ammoAmount.ToString());
+        }
+
     }
 
     public void RespawnPlayer()
@@ -43,5 +48,19 @@ public class GameManager : MonoBehaviour
        
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene("OutdoorsScene");
+    }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+   
+    public void QuitToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
 }

@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3004942282792913169
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1448516759108398, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_Name
+      value: PistolAmmo Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.3320147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000028133392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.781279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674047529563598, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80f8fca9214400545a1ca2b836458454, type: 3}
+--- !u!1 &3005755272691774015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1448516759108398, guid: 80f8fca9214400545a1ca2b836458454,
+    type: 3}
+  m_PrefabInstance: {fileID: 3004942282792913169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5308751692048138995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005755272691774015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908dcdb81d83603479e3cc8c713334e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoAmmount: 16
+  ammoType: Pistol
+  weapon: {fileID: 0}
+--- !u!65 &8066000586656492726
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005755272691774015}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20384097, y: 0.4148047, z: 0.17127827}
+  m_Center: {x: -0.0003395796, y: 0.19988488, z: -0.0059849382}

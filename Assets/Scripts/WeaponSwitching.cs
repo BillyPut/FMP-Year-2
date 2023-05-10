@@ -65,4 +65,18 @@ public class WeaponSwitching : MonoBehaviour
         }
 
     }
+
+    public void UseAmmoPickup(int ammoAmmount, string ammoType)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            WeaponSystem gun = transform.GetChild(i).GetComponent<WeaponSystem>();
+            Debug.Log(gun.gunData.name);
+
+            if (ammoType == gun.gunData.name)
+            {
+                gun.gunData.overallAmmo += ammoAmmount;
+            }
+        }
+    }
 }

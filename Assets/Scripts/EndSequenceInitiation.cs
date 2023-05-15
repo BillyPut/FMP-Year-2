@@ -9,13 +9,17 @@ public class EndSequenceInitiation : MonoBehaviour
 
     private bool buttonsAppeared;
     public GameObject choiceButtons;
-    public GameObject enemies;
 
+    public GameObject enemies;
     public WeaponSwitching weapons;
+    public GameObject blasterText;
+
     public MouseLook cam;
 
     private float detonateTimer;
     public TextMeshProUGUI detonateText;
+
+    public DoorOpenShut closingDoor;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +61,7 @@ public class EndSequenceInitiation : MonoBehaviour
     {
         countdownSequence = true;
         detonateTimer = 60.0f;
+        closingDoor.moveIt = true;
         ResetValues();
     }
     
@@ -64,7 +69,9 @@ public class EndSequenceInitiation : MonoBehaviour
     {
         blasterAcquired = true;
         weapons.weaponAmount += 1;
+        blasterText.SetActive(true);
         enemies.SetActive(true);
+        closingDoor.moveIt = true;
         ResetValues();     
     }
 

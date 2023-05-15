@@ -37,7 +37,7 @@ public class WeaponSystem : MonoBehaviour
                 RaycastHit laserHit;
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out laserHit, target))
                 {
-                    Debug.Log(laserHit.collider.name);
+                    //Debug.Log(laserHit.collider.name);
 
                     if (laserHit.collider.tag == "Enemy")
                     {

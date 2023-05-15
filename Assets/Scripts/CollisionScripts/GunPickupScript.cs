@@ -5,6 +5,8 @@ using UnityEngine;
 public class GunPickupScript : MonoBehaviour
 {
     public WeaponSwitching weaponSwitching;
+    public GameObject gunText;
+    public DoorOpenShut doorOpen, doorShut;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +19,9 @@ public class GunPickupScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             weaponSwitching.weaponAmount += 1;
+            gunText.SetActive(true);
+            doorOpen.moveIt = true;
+            doorShut.moveIt = true;
             Destroy(gameObject);
         }
     }

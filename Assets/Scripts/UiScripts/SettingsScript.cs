@@ -25,6 +25,7 @@ public class SettingsScript : MonoBehaviour
     //public int currentResolutionIndex;
 
     public Button hfQButton, pQButton;
+    public GameObject pointer1, pointer2;
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +125,19 @@ public class SettingsScript : MonoBehaviour
         SettingPlayerPrefs();
         //Enable camera override for shadow maps
         hdCam.renderingPathCustomFrameSettingsOverrideMask.mask[(int)FrameSettingsField.ShadowMaps] = true;
+        
+        if (PlayerPrefs.GetInt("Quallity") == 0)
+        {
+            pointer1.SetActive(true);
+            pointer2.SetActive(false);
+        }
+        if (PlayerPrefs.GetInt("Quality") == 2)
+        {
+            pointer1.SetActive(false);
+            pointer2.SetActive(true);
+        }
+
+     
     }
 
     public void SettingPlayerPrefs()
@@ -173,7 +187,6 @@ public class SettingsScript : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("Resolution", resolutionIndex);
-        Debug.Log(resolutionIndex);
     }
 
     public void SetFullscreen(bool isFullscreen)

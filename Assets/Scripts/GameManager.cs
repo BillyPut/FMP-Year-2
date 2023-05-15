@@ -12,11 +12,17 @@ public class GameManager : MonoBehaviour
     public WeaponSwitching weaponSwitching;
     public Vector3 respawnPoint;
     public GameObject player;
-
+    
+    public GameObject startButton;
+    
+    public MouseLook cam;
+    public GameObject pauseMenu;
+    public Slider healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
+        startButton.GetComponent<Button>().Select();
         health = 100;
     }
 
@@ -27,9 +33,11 @@ public class GameManager : MonoBehaviour
         {
             health = 100;
         }
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
+            SceneManager.LoadScene("Menu");
+            cam.cursorState = 0;
         }
         
         if (healthText != null)
@@ -37,6 +45,18 @@ public class GameManager : MonoBehaviour
             healthText.text = (health.ToString());
             ammoText.text = (weaponSwitching.ammo.ToString());
             totalammoText.text = (weaponSwitching.ammoAmount.ToString());
+        }
+
+        if (Input.GetKey(KeyCode.Escape) && pauseMenu != null)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            cam.cursorState = 0;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.value = health;
         }
 
     }
@@ -50,7 +70,16 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("OutdoorsScene");
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            SceneManager.LoadScene("OutdoorsScene");
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            cam.cursorState = 1;
+        }
+        
     }
 
     public void QuitGame()

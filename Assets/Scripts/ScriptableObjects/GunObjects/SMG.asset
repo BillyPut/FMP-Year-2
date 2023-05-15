@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SubMachine-Gun
   damage: 6
-  fireRate: 0.05
+  fireRate: 0.08
   ammo: 30
   magsize: 30
   overallAmmo: 120

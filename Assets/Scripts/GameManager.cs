@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public Slider healthBar;
 
+    private bool dead;
+    public GameObject blackScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,13 @@ public class GameManager : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            SceneManager.LoadScene("Menu");
+
+            if (dead == false)
+            {
+                StartCoroutine(Death());
+                dead = true;
+            }
+            
             cam.cursorState = 0;
         }
         
@@ -90,6 +98,15 @@ public class GameManager : MonoBehaviour
     public void QuitToMenu()
     {
         Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
+
+    private IEnumerator Death()
+    {
+        blackScreen.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
         SceneManager.LoadScene("Menu");
     }
 }

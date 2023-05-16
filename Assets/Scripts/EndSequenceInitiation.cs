@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndSequenceInitiation : MonoBehaviour
 {
@@ -15,8 +15,11 @@ public class EndSequenceInitiation : MonoBehaviour
     public GameObject blasterText;
 
     public MouseLook cam;
+    public GameObject blackScreen;
 
-    private float detonateTimer;
+    [HideInInspector]
+    public float detonateTimer;
+
     public TextMeshProUGUI detonateText;
 
     public DoorOpenShut closingDoor;
@@ -35,6 +38,8 @@ public class EndSequenceInitiation : MonoBehaviour
         if (detonateTimer <= 0 && countdownSequence == true)
         {
             detonateTimer = 0;
+            StartCoroutine(Die());
+            
         }
         else
         {
@@ -80,5 +85,16 @@ public class EndSequenceInitiation : MonoBehaviour
         choiceButtons.SetActive(false);
         cam.cursorState = 1;
         Time.timeScale = 1;
+    }
+
+    private IEnumerator Die()
+    {
+        blackScreen.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        cam.cursorState = 0;
+        SceneManager.LoadScene("Menu");
+
     }
 }

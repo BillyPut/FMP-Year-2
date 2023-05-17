@@ -28,7 +28,7 @@ public class WeaponSwitching : MonoBehaviour
             guns[i] = transform.GetChild(i);
            
         }
-
+        
         weaponAmount = 1;
     }
 

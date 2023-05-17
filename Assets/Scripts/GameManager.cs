@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     private bool dead;
     public GameObject blackScreen;
+
+    [HideInInspector]
+    public bool pauseDisable;
+    private bool pauseMenuOpen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour
 
             if (dead == false)
             {
+                pauseDisable = true;
                 StartCoroutine(Death());
                 dead = true;
             }
@@ -55,11 +61,13 @@ public class GameManager : MonoBehaviour
             totalammoText.text = (weaponSwitching.ammoAmount.ToString());
         }
 
-        if (Input.GetKey(KeyCode.Escape) && pauseMenu != null)
+        if (Input.GetKey(KeyCode.Escape) && pauseMenu != null && pauseDisable == false && pauseMenuOpen == false)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
             cam.cursorState = 0;
+            pauseMenuOpen = true;
+            
         }
 
         if (healthBar != null)
@@ -86,6 +94,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1.0f;
             cam.cursorState = 1;
+            pauseMenuOpen = false;
         }
         
     }

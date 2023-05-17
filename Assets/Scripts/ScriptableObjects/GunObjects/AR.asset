@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   name: AssualtRifle
-  damage: 16
+  damage: 14
   fireRate: 0.2
   ammo: 30
   magsize: 30
-  overallAmmo: 120
+  overallAmmo: 54
   reloadTime: 2.2
   reloading: 0

@@ -21,6 +21,19 @@ public class WeaponSystem : MonoBehaviour
     void Start()
     {
         gunData.ammo = gunData.magsize;
+
+        if (gunData.name == "Pistol")
+        {
+            gunData.overallAmmo = 50;
+        }
+        if (gunData.name == "AssualtRifle" || gunData.name == "SubMachine-Gun")
+        {
+            gunData.overallAmmo = 90;
+        }
+        if (gunData.name == "Blaster")
+        {
+            gunData.overallAmmo = 999;
+        }
     }
 
     // Update is called once per frame
@@ -30,7 +43,7 @@ public class WeaponSystem : MonoBehaviour
 
         Debug.DrawRay(cam.transform.position, cam.transform.forward, Color.red);
 
-        if (Input.GetMouseButtonDown(0) && gunData.reloading == false)
+        if (Input.GetMouseButton(0) && gunData.reloading == false)
         {
             if (firingTime <= 0 && gunData.ammo > 0)
             {
@@ -86,7 +99,7 @@ public class WeaponSystem : MonoBehaviour
         if (gunData.ammo + gunData.overallAmmo >= gunData.magsize)
         {
             ammoDecrease = gunData.magsize - gunData.ammo;
-            //gunData.overallAmmo -= ammoDecrease;
+            gunData.overallAmmo -= ammoDecrease;
             gunData.ammo = gunData.magsize;
         }
         else

@@ -103,7 +103,7 @@ public class SettingsScript : MonoBehaviour
         }
         else
         {
-            isOnV = false;
+            isOnS = false;
         }
 
         shadowToggle.isOn = isOnS;
@@ -174,12 +174,33 @@ public class SettingsScript : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(0);
         PlayerPrefs.SetInt("Quality", 0);
+
+        if (vSyncToggle.isOn == true)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+        }
+
     }
 
     public void SetPerformant()
     {
         QualitySettings.SetQualityLevel(2);
         PlayerPrefs.SetInt("Quality", 2);
+
+        if (vSyncToggle.isOn == true)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+        }
     }
 
     public void SetResolution(int resolutionIndex)

@@ -16,6 +16,7 @@ public class EndSequenceInitiation : MonoBehaviour
 
     public MouseLook cam;
     public GameObject blackScreen;
+    public GameManager gameManager; 
 
     [HideInInspector]
     public float detonateTimer;
@@ -23,6 +24,7 @@ public class EndSequenceInitiation : MonoBehaviour
     public TextMeshProUGUI detonateText;
 
     public DoorOpenShut closingDoor;
+    public GameObject door1, door2;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class EndSequenceInitiation : MonoBehaviour
         if (detonateTimer <= 0 && countdownSequence == true)
         {
             detonateTimer = 0;
+            gameManager.pauseDisable = true;
             StartCoroutine(Die());
             
         }
@@ -67,6 +70,7 @@ public class EndSequenceInitiation : MonoBehaviour
         countdownSequence = true;
         detonateTimer = 60.0f;
         closingDoor.moveIt = true;
+        door1.SetActive(false);
         ResetValues();
     }
     
@@ -77,6 +81,7 @@ public class EndSequenceInitiation : MonoBehaviour
         blasterText.SetActive(true);
         enemies.SetActive(true);
         closingDoor.moveIt = true;
+        door2.SetActive(false);
         ResetValues();     
     }
 

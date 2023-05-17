@@ -17,6 +17,6 @@ MonoBehaviour:
   fireRate: 0.08
   ammo: 30
   magsize: 30
-  overallAmmo: 120
+  overallAmmo: 90
   reloadTime: 1.8
   reloading: 0

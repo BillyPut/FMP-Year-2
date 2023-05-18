@@ -12,7 +12,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //weapon.UseAmmoPickup(ammoAmmount, ammoType);
+            weapon.UseAmmoPickup(ammoAmmount, ammoType);
             Destroy(gameObject);
         }
     

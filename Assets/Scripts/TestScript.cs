@@ -16,6 +16,6 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-         
+         transform.LookAt(player.transform.position);   
     }
 }

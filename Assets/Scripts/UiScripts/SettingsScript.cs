@@ -22,7 +22,7 @@ public class SettingsScript : MonoBehaviour
 
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
-    //public int currentResolutionIndex;
+    public int currentResolutionIndex;
 
     public Button hfQButton, pQButton;
     public GameObject pointer1, pointer2;
@@ -37,20 +37,19 @@ public class SettingsScript : MonoBehaviour
 
         List<string> options = new List<string>();
 
-        //currentResolutionIndex = 0;
+        currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].ToString();
+            string option = resolutions[i].width + "x" + resolutions[i].height + "@" + resolutions[i].refreshRate + "hz";
             options.Add(option);
 
-            /*if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;             
-            }*/
+            }
         }
         
         resolutionDropdown.AddOptions(options);
-        //resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
         if (PlayerPrefs.HasKey("Resolution") == true)
@@ -59,7 +58,7 @@ public class SettingsScript : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("Resolution", options.Count);
+            PlayerPrefs.SetInt("Resolution", currentResolutionIndex);
             resolutionDropdown.value = PlayerPrefs.GetInt("Resolution");
         }
         

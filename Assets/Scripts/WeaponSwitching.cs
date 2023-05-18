@@ -91,7 +91,6 @@ public class WeaponSwitching : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             WeaponSystem gun = transform.GetChild(i).GetComponent<WeaponSystem>();
-            Debug.Log(gun.gunData.name);
 
             if (ammoType == gun.gunData.name)
             {

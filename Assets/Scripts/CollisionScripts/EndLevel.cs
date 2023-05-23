@@ -10,6 +10,7 @@ public class EndLevel : MonoBehaviour
     public GameObject hud, timer, whiteScreen, endText;
     public EndSequenceInitiation endSequence;
     public GameManager gameManager;
+    public MouseLook cam;
 
     [SerializeField][TextArea] private string[] endingText;
     [SerializeField] private TextMeshProUGUI endMessage;
@@ -43,6 +44,7 @@ public class EndLevel : MonoBehaviour
 
         yield return new WaitForSeconds(5.0f);
 
+        cam.cursorState = 0;
         SceneManager.LoadScene("Menu");
     }
 

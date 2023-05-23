@@ -13286,7 +13286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sci-fi Warehouse - Sickghead games
+  m_text: Sci-fi Warehouse - Sickhead games
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f2841be83f6c784438beed6368f53f71, type: 2}
   m_sharedMaterial: {fileID: 8367011983048285365, guid: f2841be83f6c784438beed6368f53f71,

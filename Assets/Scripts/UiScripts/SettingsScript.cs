@@ -176,6 +176,7 @@ public class SettingsScript : MonoBehaviour
 
         if (vSyncToggle.isOn == true)
         {
+            Application.targetFrameRate = -1;
             QualitySettings.vSyncCount = 1;
         }
         else
@@ -193,6 +194,7 @@ public class SettingsScript : MonoBehaviour
 
         if (vSyncToggle.isOn == true)
         {
+            Application.targetFrameRate = -1;
             QualitySettings.vSyncCount = 1;
         }
         else
@@ -225,6 +227,7 @@ public class SettingsScript : MonoBehaviour
     {
         if (isVsync == true)
         {
+            Application.targetFrameRate = -1;
             QualitySettings.vSyncCount = 1;
         }
         else

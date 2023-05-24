@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4674047529563598, guid: e32e8fe1315a7e8448a3bb99812debf3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4674047529563598, guid: e32e8fe1315a7e8448a3bb99812debf3, type: 3}
       propertyPath: m_LocalScale.x
@@ -66,6 +66,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4674047529563598, guid: e32e8fe1315a7e8448a3bb99812debf3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23139493101246506, guid: e32e8fe1315a7e8448a3bb99812debf3,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23394090300936264, guid: e32e8fe1315a7e8448a3bb99812debf3,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23444579414406982, guid: e32e8fe1315a7e8448a3bb99812debf3,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23540375646762946, guid: e32e8fe1315a7e8448a3bb99812debf3,
+        type: 3}
+      propertyPath: m_LightProbeUsage
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

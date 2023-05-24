@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
     {
         startButton.GetComponent<Button>().Select();
         health = 100;
+
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     // Update is called once per frame
@@ -61,9 +66,10 @@ public class GameManager : MonoBehaviour
             totalammoText.text = (weaponSwitching.ammoAmount.ToString());
         }
 
-        if (Input.GetKey(KeyCode.Escape) && pauseMenu != null && pauseDisable == false && pauseMenuOpen == false)
+        if (Input.GetKey(KeyCode.Escape) && pauseMenu != null && pauseDisable == false && pauseMenuOpen == false && SceneManager.GetActiveScene().name == "OutdoorsScene")
         {
             pauseMenu.SetActive(true);
+            startButton.GetComponent<Button>().Select();
             Time.timeScale = 0f;
             cam.cursorState = 0;
             pauseMenuOpen = true;

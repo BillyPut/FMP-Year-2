@@ -70,7 +70,7 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();    
         col = GetComponent<CapsuleCollider>();
         path = new NavMeshPath();
-        maxDist = 30f;
+        maxDist = 40f;
         minDist = 5f;
 
         currentAmmo = 20;

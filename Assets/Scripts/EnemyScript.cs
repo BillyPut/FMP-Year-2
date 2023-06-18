@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
@@ -63,12 +64,16 @@ public class EnemyScript : MonoBehaviour
     public EnemyScript enemyScript;
     private NavMeshPath path;
 
+    AudioSource audioSource;
+    public GameObject stepSource;
+
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();    
         col = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
         path = new NavMeshPath();
         maxDist = 40f;
         minDist = 5f;
@@ -289,6 +294,7 @@ public class EnemyScript : MonoBehaviour
             fireRate = 0.3f;
             lastPosTimer = 0.27f;
             currentAmmo -= 1;
+            audioSource.Play();
         }
 
         if (currentAmmo == 0 && reloading == false) 
@@ -316,6 +322,11 @@ public class EnemyScript : MonoBehaviour
     {
         health -= damage;
         detectPlayer = true;
+    }
+
+    public void PlayStepNoise()
+    {
+        stepSource.GetComponent<AudioSource>().Play();
     }
 
     void OnTriggerEnter(Collider other)

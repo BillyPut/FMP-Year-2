@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Audio;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -16,10 +17,13 @@ public class WeaponSystem : MonoBehaviour
     private int ammoDecrease;
     public GameObject explosion;
     public GameObject particleHit;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         gunData.ammo = gunData.magsize;
 
         if (gunData.name == "Pistol")
@@ -70,8 +74,10 @@ public class WeaponSystem : MonoBehaviour
 
                 }
 
+                audioSource.Play();
                 gunData.ammo -= 1;
                 firingTime = gunData.fireRate;
+
             }
             if (gunData.ammo <= 0 && this.gameObject.activeSelf)
             {
